@@ -1,0 +1,23 @@
+numpy
+opencv-python
+addict
+six
+torchvision>=0.5.*
+pillow>=6.0,<7.0
+lmdb
+nltk
+terminaltables
+albumentations
+torch>=1.7
+loguru
+tqdm
+thop
+ninja
+tabulate
+psutil
+tensorboard
+# verified versions
+# pycocotools corresponds to https://github.com/ppwwyyxx/cocoapi
+pycocotools>=2.0.2
+onnx>=1.13.0
+onnx-simplifier==0.4.10
