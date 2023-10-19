@@ -23,6 +23,16 @@ cd licenseplate_detection
 pip3 install torch torchvision
 pip3 install -r requirements.txt
 ```
+
+### 4. Download YOLOX-s and YOLOX-l models weight files
+```
+[yolox-s]
+(https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.pth)
+
+[yolox-l]
+(https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth)
+```
+
 ## Inference
 ```
 python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
