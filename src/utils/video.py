@@ -42,26 +42,6 @@ class Video:
     
     def __exit__(self, exec_type, exec_value, traceback):
         return self.cap.release()
-    
-    # def save_output(self):
-    #     video_output = self.video_writer()
-    #     while self.cap.isOpened():
-    #         success, frame = self.cap.read()
-            
-    #         if not success:
-    #             print("Ignoring empty frame.")
-    #             break
-            
-    #         cv2.imshow("Test", frame)
-    #         video_output.write(frame)
-            
-    #         if cv2.waitKey(5) & 0xFF == 27:
-    #             break
-    #     print("Finish")
-    #     self.cap.release()
-    #     video_output.release()
-    #     cv2.destroyAllWindows()
-              
 
     def get_output(self):
         return self.__output_path
