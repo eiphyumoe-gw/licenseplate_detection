@@ -115,12 +115,20 @@ class Predictor(object):
                 img_cpy = img_cpy[y0:y1, x0:x1]
                 result_str = self.read_license_from_image(img_cpy)
                 total_result_str.append(result_str)
-                cv2.imwrite(f'result/test_{i}.png', img_cpy)
+                # cv2.imwrite(f'result/test_{i}.png', img_cpy)
     
         vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
         return vis_res, total_result_str, bbox_count
     
     def read_license_from_image(self, image):
+        """ This function return predicted string of the text on the license plate.
+
+        Args:
+            image : Cropped image of only license plate
+
+        Returns:
+            str: strings predicted from Scene Text Recognition (small_satrn model)
+        """
         cfg_path = self.configs.cfg
         checkpoint = self.configs.checkpoint
         cfg = Config.fromfile(cfg_path)
