@@ -19,7 +19,6 @@ class Demo:
         self.load_model()
         self.IMAGE_EXT = [".jpg", ".jpeg", ".webp", ".bmp", ".png"]
         self.predictor = Predictor(self.model, self.exp, COCO_CLASSES, self.device, configs=self.configs)
-        self.total_result = dict()
     
     def load_model(self):
         self.exp = get_exp(None, self.args.name) # select model name
@@ -58,25 +57,26 @@ class Demo:
         return result_image, result_str
     
     def video_demo(self, path, output):
-        
+        final_result = list()
         frame_count = 0
         with Video(path, output) as movie_loader:
             print("Path is ", path)
             for frame in movie_loader.process_video():
+                result_dict = dict()
                 frame_count += 1
                 with torch.no_grad():
                     result_img, img_info = self.predictor.inference(frame)
                     result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
-                    self.total_result['frame_id'] = frame_count
-                    self.total_result['Detected_bbox'] = bbox
-                    self.total_result['result'] = result_str
+                    result_dict['frame_id'] = frame_count
+                    result_dict['Detected_bbox'] = bbox
+                    result_dict['result'] = result_str
                     cv2.imshow("Test",result_frame)
-                    
+                    final_result.append(result_dict)
                     if cv2.waitKey(5) & 0xFF == 27:
                         break
                 movie_loader.video_writer(result_frame)
             movie_loader.close()
-        return self.total_result
+        return final_result
     
         
 def make_parser():
