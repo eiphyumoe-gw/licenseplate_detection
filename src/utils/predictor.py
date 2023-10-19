@@ -87,6 +87,7 @@ class Predictor(object):
     
     def visual(self, output, img_info, cls_conf=0.35):
         total_result_str = list()
+        bbox_count = 0
         ratio = img_info["ratio"]
         img = img_info["raw_img"]
         if output is None:
@@ -110,13 +111,14 @@ class Predictor(object):
                 y0 = int(box[1])
                 x1 = int(box[2])
                 y1 = int(box[3])
+                bbox_count += 1
                 img_cpy = img_cpy[y0:y1, x0:x1]
                 result_str = self.read_license_from_image(img_cpy)
                 total_result_str.append(result_str)
                 cv2.imwrite(f'result/test_{i}.png', img_cpy)
     
         vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
-        return vis_res, total_result_str,len(bboxes)
+        return vis_res, total_result_str, bbox_count
     
     def read_license_from_image(self, image):
         cfg_path = self.configs.cfg
