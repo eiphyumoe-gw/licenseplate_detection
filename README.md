@@ -24,14 +24,19 @@ pip3 install torch torchvision
 pip3 install -r requirements.txt
 ```
 
-### 4. Download YOLOX-s and YOLOX-l models weight files
-```
-[yolox-s]
-(https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.pth)
+### 4. Download YOLOX models weight files and model file of Scene Text Recognition(OCR)
 
-[yolox-l]
-(https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth)
-```
+|Model      | Weights       |
+|-----------|---------------|
+|Yolox-s    | [github](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.pth)|
+|Yolox-l    | [github](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth)|
+|Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
+
+Then, create checkpoint folder under OCR folder and paste the small-satrn model into it.
+
+### 5. Download the checkpoint of OCR
+
+
 
 ## Inference
 ```
