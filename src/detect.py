@@ -1,6 +1,6 @@
 '''
-Filename: /home/epm/licenseplate_detection/src/detect.py
-Path: /home/epm/licenseplate_detection/src
+Filename: ../licenseplate_detection/src/detect.py
+Path: ../licenseplate_detection/src
 Created Date: Wednesday, October 18th 2023, 4:16:08 pm
 Author: EPM
 
