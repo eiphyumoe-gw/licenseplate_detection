@@ -7,7 +7,7 @@ import random
 import cv2
 import numpy as np
 import sys
-sys.path.append(r"/home/epm/licenseplate_detection/src/YOLOX")
+sys.path.append("../licenseplate_detection/src/YOLOX")
 
 from yolox.utils import adjust_box_anns, get_local_rank
 
