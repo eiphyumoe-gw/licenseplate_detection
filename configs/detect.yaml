@@ -2,7 +2,7 @@ YOLOX:
   conf: 0.25
   nms: 0.45
   tsize: 640
-  cfg: '/home/epm/licenseplate_detection/src/OCR/configs/small_satrn.py'
-  ckpt: '/home/epm/licenseplate_detection/src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
-  checkpoint: '/home/epm/licenseplate_detection/src/OCR/checkpoint/small_satrn.pth'
+  cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
+  ckpt: '../licenseplate_detection/src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
+  checkpoint: '../licenseplate_detection/src/OCR/checkpoint/small_satrn.pth'
   gpus: '0'
