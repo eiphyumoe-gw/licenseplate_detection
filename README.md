@@ -11,7 +11,7 @@ source env/bin/activate
 ### 2. Clone the repository.
 ```
 git clone git@github.com:eiphyumoe47/licenseplate_detection.git
-cd Licenseplate_detection
+cd licenseplate_detection
 ```
 
 ### 3. Install pytorch and dependencies.
@@ -21,6 +21,6 @@ pip3 install -r requirements.txt
 ```
 ## Inference
 ```
-python3 src/detect.py --path /../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
+python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
 ```
 You can modify the configurations as you wish.
