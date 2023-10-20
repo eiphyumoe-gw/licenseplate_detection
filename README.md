@@ -29,13 +29,13 @@ pip3 install -r requirements.txt
 |-----------|---------------|
 |Yolox-s    | [gdrive](https://drive.google.com/file/d/1KT0iE67gWCXBUDfHL7gcc8xhvhDk7gBO/view?usp=sharing)|
 |Yolox-l    | [gdrive](https://drive.google.com/file/d/1XxtFK2RI4y3DEPnPO-xiV9ZtSqrJ4yRn/view?usp=sharing)|
-|test       | [download](gdown.download(f"https://drive.google.com/uc?id={1KT0iE67gWCXBUDfHL7gcc8xhvhDk7gBO}"))
 
 
 ### 5. Download the OCR model file.
 |Model      | Weights       |
 |-----------|---------------|
 |Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
+
 Then, create checkpoint folder under OCR folder and paste the small-satrn model into it.
 
 ```
