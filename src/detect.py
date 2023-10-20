@@ -19,7 +19,7 @@ def make_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default='../licenseplate_detection/configs/detect.yaml', help="Path to your config file")
     parser.add_argument("--path", help= "Path to your image or video")
-    parser.add_argument("--output", default= '../licenseplate_detection/result', help= "Path to your ouput folder")
+    parser.add_argument("--output", default= '../result', help= "Path to your ouput folder")
     parser.add_argument("--name", default="yolox-s", help="Please select yolox-s or yolox-l")
 
     return parser
