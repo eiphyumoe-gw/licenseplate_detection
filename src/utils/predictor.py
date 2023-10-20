@@ -20,7 +20,7 @@ class Predictor(object):
         cls_names=COCO_CLASSES,
         trt_file=None,
         decoder=None,
-        device="cpu",
+        device="cuda",
         fp16=False,
         legacy=False,
         configs = None,
@@ -37,6 +37,7 @@ class Predictor(object):
         self.device = device
         self.fp16 = fp16
         self.preproc = ValTransform(legacy=legacy)
+        self.load_inference_runner()
     
         # if trt_file is not None:
         #     from torch2trt import TRTModule
@@ -129,6 +130,13 @@ class Predictor(object):
         Returns:
             str: strings predicted from Scene Text Recognition (small_satrn model)
         """
+        
+        pred_str, probs = self.runner(image)
+        self.runner.logger.info('predict string: {}'.format(pred_str))
+        return pred_str
+    
+    
+    def load_inference_runner(self):
         cfg_path = self.configs.cfg
         checkpoint = self.configs.checkpoint
         cfg = Config.fromfile(cfg_path)
@@ -137,11 +145,7 @@ class Predictor(object):
         common_cfg = cfg.get('common')
         deploy_cfg['gpu_id'] = self.configs.gpus.replace(" ", "")
 
-        runner = InferenceRunner(deploy_cfg, common_cfg)
-        runner.load_checkpoint(checkpoint)
-        pred_str, probs = runner(image)
-        runner.logger.info('predict string: {}'.format(pred_str))
-        return pred_str
-    
+        self.runner = InferenceRunner(deploy_cfg, common_cfg)
+        self.runner.load_checkpoint(checkpoint)
 
     
