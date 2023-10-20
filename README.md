@@ -27,15 +27,17 @@ pip3 install -r requirements.txt
 
 |Model      | Weights       |
 |-----------|---------------|
-|Yolox-s    | [github](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.pth)|
-|Yolox-l    | [github](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth)|
-|Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
+|Yolox-s    | [github](https://drive.google.com/file/d/1KT0iE67gWCXBUDfHL7gcc8xhvhDk7gBO/view?usp=sharing)|
+|Yolox-l    | [github](https://drive.google.com/file/d/1XxtFK2RI4y3DEPnPO-xiV9ZtSqrJ4yRn/view?usp=sharing)|
 
+
+
+### 5. Download the OCR model file.
+|Model      | Weights       |
+|-----------|---------------|
+|Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
 Then, create checkpoint folder under OCR folder and paste the small-satrn model into it.
 
-
-
-## Inference
 ```
 python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
 ```
