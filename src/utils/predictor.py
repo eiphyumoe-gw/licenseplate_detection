@@ -92,7 +92,7 @@ class Predictor(object):
         ratio = img_info["ratio"]
         img = img_info["raw_img"]
         if output is None:
-            return img, total_result_str
+            return img, total_result_str, bbox_count
         output = output.cpu()
 
         bboxes = output[:, 0:4]
