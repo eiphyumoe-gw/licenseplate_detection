@@ -41,7 +41,7 @@ These two models are the best ckpt model files which are trained based on the pr
 |Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|91.97|False|
 
 The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model has been used in this project.</br></br>
-*Note: Create checkpoint folder under OCR folder and paste downloaded model into it.*
+*Note: Create checkpoint folder and move downloaded file to `checkpoint/`.*
 
 ## Inference
 
