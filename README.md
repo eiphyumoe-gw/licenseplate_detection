@@ -23,20 +23,25 @@ cd licenseplate_detection
 pip3 install -r requirements.txt
 ```
 
-### 4. Download YOLOX models weight files and model file of Scene Text Recognition(OCR)
+### 4. Download YOLOX models weight files.
 
 |Model      | Weights       |
 |-----------|---------------|
 |Yolox-s    | [gdrive](https://drive.google.com/file/d/1KT0iE67gWCXBUDfHL7gcc8xhvhDk7gBO/view?usp=sharing)|
 |Yolox-l    | [gdrive](https://drive.google.com/file/d/1XxtFK2RI4y3DEPnPO-xiV9ZtSqrJ4yRn/view?usp=sharing)|
 
+These two models are the best ckpt model files which are trained based on the pretrained yolox-s and yolox-l model from [this repo](https://github.com/Megvii-BaseDetection/YOLOX).
 
-### 5. Download the OCR model file.
-|Model      | Weights       |
-|-----------|---------------|
-|Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
+### 5. Download the Pretrained OCR model file.
+|Model      | Weights       |IIIT5k_300     |Case-sensitive|
+|-----------|---------------|---------------|--------------|
+|ResNet-CTC |[github](https://drive.google.com/file/d/1gtTcc5kpVs_s5a6OR7eBh431Otk_-NrE/view?usp=sharing)|87.97|False|
+|ResNet-FC  |[github](https://drive.google.com/file/d/1OnUGdv9RFhFbQGXUUkWMcxUZg0mPV0kK/view?usp=sharing)|88.80|False|
+|TPS-ResNet-BiLSTM-Attention|[github](https://drive.google.com/file/d/1YUOAU7xcrrsAtEqEGtI5ZD7eryP7Zr04/view?usp=sharing)|90.93|False|
+|Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|91.97|False|
 
-Then, create checkpoint folder under OCR folder and paste the small-satrn model into it.
+The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model has been used in this project.
+Then, create checkpoint folder under OCR folder and paste downloaded model into it.
 
 ```
 python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
