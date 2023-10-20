@@ -48,6 +48,6 @@ The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model h
 ## Inference
 
 ```
-python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
+python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output result
 ```
 You can modify the configurations as you wish.
