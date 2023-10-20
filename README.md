@@ -40,8 +40,10 @@ These two models are the best ckpt model files which are trained based on the pr
 |TPS-ResNet-BiLSTM-Attention|[github](https://drive.google.com/file/d/1YUOAU7xcrrsAtEqEGtI5ZD7eryP7Zr04/view?usp=sharing)|90.93|False|
 |Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|91.97|False|
 
-The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model has been used in this project.
-Then, create checkpoint folder under OCR folder and paste downloaded model into it.
+The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model has been used in this project.</br></br>
+*Note: create checkpoint folder under OCR folder and paste downloaded model into it.*
+
+## Inference
 
 ```
 python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output licenseplate_detection/result
