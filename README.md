@@ -32,6 +32,8 @@ pip3 install -r requirements.txt
 
 These two models are the best ckpt model files which are trained based on the pretrained yolox-s and yolox-l model from [this repo](https://github.com/Megvii-BaseDetection/YOLOX).
 
+*Note: Yolox-s has been used in this project. Create folder `YOLOX_outputs/yolox-s`.Move Yolox weight files under `src/YOLOX/yolox/YOLOX_outputs/yolox-s/`.*
+
 ### 5. Download the Pretrained OCR model file.
 |Model      | Weights       |IIIT5k_300     |Case-sensitive|
 |-----------|---------------|---------------|--------------|
