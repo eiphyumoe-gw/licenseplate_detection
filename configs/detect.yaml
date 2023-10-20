@@ -1,5 +1,5 @@
 YOLOX:
-  conf: 0.25
+  conf: 0.7
   nms: 0.45
   tsize: 640
   cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
