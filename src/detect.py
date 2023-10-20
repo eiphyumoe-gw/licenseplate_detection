@@ -32,6 +32,8 @@ def write_json(result_str, output):
 def main():
     args = make_parser().parse_args()
     configs = OmegaConf.load(args.config)
+    if not os.path.exists(args.output):
+        os.mkdir(args.output)
     json_output = os.path.join(args.output, 'predicted.json')
     demo = Demo(args, configs.YOLOX)
     result_str = demo.video_demo(args.path, args.output)
