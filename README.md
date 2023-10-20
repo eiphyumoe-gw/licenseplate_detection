@@ -20,7 +20,6 @@ cd licenseplate_detection
 
 ### 3. Install pytorch and dependencies.
 ```
-pip3 install torch torchvision
 pip3 install -r requirements.txt
 ```
 
@@ -33,8 +32,6 @@ pip3 install -r requirements.txt
 |Small-satrn| [github](https://drive.google.com/file/d/1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR/view)|
 
 Then, create checkpoint folder under OCR folder and paste the small-satrn model into it.
-
-### 5. Download the checkpoint of OCR
 
 
 
