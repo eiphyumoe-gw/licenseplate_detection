@@ -25,8 +25,9 @@ class Demo:
         self.model = self.exp.get_model()
         self.model.cuda()
         self.model.eval()
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        ckpt = torch.load(self.configs.ckpt, map_location="cpu")
+        # self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if self.configs.YOLOX.device=="gpu" else "cpu")
+        ckpt = torch.load(self.configs.YOLOX.ckpt, map_location="cpu")
         self.model.load_state_dict(ckpt['model'])
         self.model = fuse_model(self.model)
         
