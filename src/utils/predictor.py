@@ -91,6 +91,7 @@ class Predictor(object):
         bbox_count = 0
         ratio = img_info["ratio"]
         img = img_info["raw_img"]
+        print(output)
         if output is None:
             return img, total_result_str, bbox_count
         output = output.cpu()
@@ -113,7 +114,12 @@ class Predictor(object):
                 x1 = int(box[2])
                 y1 = int(box[3])
                 bbox_count += 1
-                img_cpy = img_cpy[y0:y1, x0:x1]
+                
+                x0 = x0 if x0>-1 else 0
+                x1 = x1 if x1>-1 else 0
+                y0 = y0 if y0>-1 else 0
+                y1 = y1 if y1>-1 else 0
+                img_cpy = img_cpy[y0:y1, x0:x1]            
                 result_str = self.read_license_from_image(img_cpy)
                 total_result_str.append(result_str)
                 # cv2.imwrite(f'result/test_{i}.png', img_cpy)
