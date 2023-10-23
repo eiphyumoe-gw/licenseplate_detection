@@ -13,10 +13,8 @@ class InferenceRunner(Common):
     def __init__(self, deploy_cfg, common_cfg=None):
         deploy_cfg = deploy_cfg.copy()
         common_cfg = {} if common_cfg is None else common_cfg.copy()
-        if not deploy_cfg['device'] == 'cpu':
-            common_cfg['gpu_id'] = deploy_cfg.get('device')
-        else:
-            common_cfg['gpu_id'] = 'cpu'
+        common_cfg['gpu_id'] = deploy_cfg.pop('gpu_id')
+        common_cfg['device'] = deploy_cfg['device']
             
         super(InferenceRunner, self).__init__(common_cfg)
 
@@ -35,7 +33,7 @@ class InferenceRunner(Common):
         self.device = device
         model = build_model(cfg)
         self.need_text = model.need_text
-        if not self.device == 'cpu':
+        if torch.cuda.is_available() and self.device == 'gpu':
             if torch.cuda.device_count() > 1:
                 model = torch.nn.DataParallel(model)
             model.cuda()
