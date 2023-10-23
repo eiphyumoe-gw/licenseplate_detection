@@ -18,11 +18,11 @@ class Video:
         self.__fps = int(self.cap.get(cv2.CAP_PROP_FPS))
         self.__frame_width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         self.__frame_height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        self.frame_count = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        self.__frame_count = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
         
         
     def process_video(self):
-        with tqdm(total=self.frame_count) as pbar:
+        with tqdm(total=self.__frame_count) as pbar:
            while self.cap.isOpened():
                 ret, frame = self.cap.read()
                 if not ret:
@@ -30,6 +30,8 @@ class Video:
                 yield frame
                 pbar.update(1)
     
+    def get_fps(self):
+        return self.__fps
     
     def video_writer(self, frame):
         self.video_output.write(frame)
