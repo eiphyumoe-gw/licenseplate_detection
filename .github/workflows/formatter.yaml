@@ -1,0 +1,28 @@
+name: formatter_test
+
+on: [push]
+
+jobs:
+  formatter_test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Python 3.8
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.8'
+                architecture: 'x64'
+            - name: Display Python version
+              run: python -c "import sys; print(sys.version)"
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip setuptools wheel
+                pip3 install cython torch torchvision
+            - name: Install requirements
+              run: |
+                pip3 install -r requirements.txt    
+            - name: Lint with black
+              run: |
+                pip3 install black
+                python -m black src/
+              continue-on-error: true
