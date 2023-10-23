@@ -21,6 +21,7 @@ def make_parser():
     parser.add_argument("--path", required=True, help= "Path to your image or video")
     parser.add_argument("--output", default= '../result', help= "Path to your ouput folder")
     parser.add_argument("--name", default="yolox-s", help="Please select yolox-s or yolox-l")
+    parser.add_argument("--device", type = str, help= "Please select CPU or GPU_ID(0,1,2,3,4)")
 
     return parser
 
@@ -33,11 +34,17 @@ def main():
     args = make_parser().parse_args()
     configs = OmegaConf.load(args.config)
     os.makedirs(args.output, exist_ok=True)
+    assert os.path.exists(args.path), "Input Path Error"
+    
+    if args.device != 'cpu':
+        assert int(args.device) < 5 , "GPU id should be 0,1,2,3,4"
+    
     json_output = os.path.join(args.output, 'predicted.json')
     demo = Demo(args, configs)
-    assert os.path.exists(args.path), "Input Path Error"
+    
     result_str = demo.video_demo(args.path, args.output)
     write_json(result_str, json_output)
+
     
 
 if __name__ == '__main__':
