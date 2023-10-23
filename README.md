@@ -1,3 +1,5 @@
+[![formatter_test](https://github.com/eiphyumoe-gw/licenseplate_detection/blob/%239_dev/.github/workflows/formatter.yaml/badge.svg)]((https://github.com/eiphyumoe-gw/licenseplate_detection/blob/%239_dev/.github/workflows/formatter.yaml))
+
 # License Plate Detection
 This repository aims to detect the text on the license plate. First, detect the car and license plate by using YOLOX. Then, extract the text from the license plate using vedastr which is an open source scene text recognition toolbox based on PyTorch.
 
