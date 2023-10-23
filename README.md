@@ -3,7 +3,7 @@ This repository aims to detect the text on the license plate. First, detect the 
 
 | Original                   | Detection by YOLOX                      | OCR Result                 |
 | ---------------------------| -----------------------------------------| -----------------------------------|
-| <img src="assets/test.jpg" width = 270>                           | <p float='left'><img src="assets/license_plate.png" width=100, height=80>&nbsp;&nbsp;&nbsp;|<font size = 5>{12122267}</font>
+| <img src="assets/test.jpg" width = 270>                           | <p float='left'><img src="assets/license_plate.png" width=100, height=80>&nbsp;&nbsp;&nbsp;|**<font size = 5>{12122267}</font>**
 
 ## Install License Plate Detection
 
