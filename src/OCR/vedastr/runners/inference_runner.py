@@ -13,8 +13,11 @@ class InferenceRunner(Common):
     def __init__(self, deploy_cfg, common_cfg=None):
         deploy_cfg = deploy_cfg.copy()
         common_cfg = {} if common_cfg is None else common_cfg.copy()
-
-        common_cfg['gpu_id'] = deploy_cfg.pop('gpu_id')
+        if not deploy_cfg['device'] == 'cpu':
+            common_cfg['gpu_id'] = deploy_cfg.get('device')
+        else:
+            common_cfg['gpu_id'] = 'cpu'
+            
         super(InferenceRunner, self).__init__(common_cfg)
 
         # build test transform
@@ -22,16 +25,17 @@ class InferenceRunner(Common):
         # build converter
         self.converter = self._build_converter(deploy_cfg['converter'])
         # build model
-        self.model = self._build_model(deploy_cfg['model'])
+        self.model = self._build_model(deploy_cfg['model'], deploy_cfg['device'])
         self.postprocess_cfg = deploy_cfg.get('postprocess', None)
         self.model.eval()
 
-    def _build_model(self, cfg):
+    def _build_model(self, cfg, device):
         self.logger.info('Build model')
 
+        self.device = device
         model = build_model(cfg)
         self.need_text = model.need_text
-        if torch.cuda.is_available():
+        if not self.device == 'cpu':
             if torch.cuda.device_count() > 1:
                 model = torch.nn.DataParallel(model)
             model.cuda()
@@ -47,6 +51,7 @@ class InferenceRunner(Common):
         if map_location == 'default':
             if self.use_gpu:
                 device_id = torch.cuda.current_device()
+                print("Current Device id is ", device_id)
                 map_location = lambda storage, loc: storage.cuda(device_id)
             else:
                 map_location = 'cpu'
