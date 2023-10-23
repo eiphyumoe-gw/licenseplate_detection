@@ -64,18 +64,21 @@ class Demo:
             print("Path is ", path)
             for frame in movie_loader.process_video():
                 result_dict = dict()
+                fps = movie_loader.get_fps()
                 frame_count += 1
                 with torch.no_grad():
                     result_img, img_info = self.predictor.inference(frame)
                     result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
                     result_dict['frame_id'] = frame_count
+                    result_dict['vd_time'] = round((frame_count/fps), 3)
                     result_dict['Detected_bbox'] = bbox
                     result_dict['result'] = result_str
                     cv2.imshow("Test",result_frame)
                     final_result.append(result_dict)
                     if cv2.waitKey(5) & 0xFF == 27:
                         break
-                movie_loader.video_writer(result_frame)
+                if self.args.save_result == 'True':
+                    movie_loader.video_writer(result_frame)
             movie_loader.close()
         return final_result
     
