@@ -18,15 +18,16 @@ class Demo:
         self.configs = configs
         self.load_model()
         self.IMAGE_EXT = [".jpg", ".jpeg", ".webp", ".bmp", ".png"]
-        self.predictor = Predictor(self.model, self.exp, COCO_CLASSES, self.device, configs=self.configs)
+        self.predictor = Predictor(self.model, self.exp, device=self.device, configs=self.configs)
     
     def load_model(self):
         self.exp = get_exp(None, self.args.name) # select model name
         self.model = self.exp.get_model()
         self.model.cuda()
         self.model.eval()
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        ckpt = torch.load(self.configs.ckpt, map_location="cpu")
+        # self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if self.configs.YOLOX.device=="gpu" else "cpu")
+        ckpt = torch.load(self.configs.YOLOX.ckpt, map_location="cpu")
         self.model.load_state_dict(ckpt['model'])
         self.model = fuse_model(self.model)
         

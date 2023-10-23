@@ -47,6 +47,7 @@ def main():
     if torch.cuda.is_available():
         device = torch.cuda.current_device()
         deploy_cfg['gpu_id'] = str(device)
+
     else:
         raise AssertionError('Please use gpu for benchmark.')
 

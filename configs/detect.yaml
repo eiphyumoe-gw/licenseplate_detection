@@ -2,7 +2,11 @@ YOLOX:
   conf: 0.7
   nms: 0.45
   tsize: 640
-  cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
+  device: gpu
   ckpt: '../licenseplate_detection/src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
+
+OCR:
+  cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
   checkpoint: '../licenseplate_detection/src/OCR/checkpoint/small_satrn.pth'
-  gpus: '0'
+  device: 'gpu' #cpu
+  gpus: '1' # 0, 1, 2, 3, 4

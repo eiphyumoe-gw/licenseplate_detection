@@ -26,8 +26,7 @@ class Common(object):
         self.logger = self._build_logger(logger_cfg)
 
         # set gpu devices
-        self.use_gpu = self._set_device(cfg.get('gpu_id', ''))
-
+        self.use_gpu = self._set_device(cfg.get('gpu_id', ''), cfg.get('device'))
         # set cudnn configuration
         self._set_cudnn(
             cfg.get('cudnn_deterministic', False),
@@ -47,17 +46,17 @@ class Common(object):
     def _build_logger(self, cfg):
         return build_logger(cfg, dict(workdir=self.workdir))
 
-    def _set_device(self, gpu_id):
-        os.environ['CUDA_VISIBLE_DEVICES'] = gpu_id
-        if torch.cuda.is_available():
+    def _set_device(self, gpu_id, device):
+        if torch.cuda.is_available() and device == 'gpu':
+            os.environ['CUDA_VISIBLE_DEVICES'] = gpu_id
             self.logger.info('Use GPU {}'.format(gpu_id))
             use_gpu = True
+            
         else:
             self.logger.info('Use CPU')
             use_gpu = False
-
         return use_gpu
-
+    
     def _set_seed(self, seed):
         if seed:
             self.logger.info('Set seed {}'.format(seed))
