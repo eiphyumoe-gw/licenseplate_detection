@@ -48,13 +48,15 @@ class Common(object):
         return build_logger(cfg, dict(workdir=self.workdir))
 
     def _set_device(self, gpu_id):
-        os.environ['CUDA_VISIBLE_DEVICES'] = gpu_id
-        if torch.cuda.is_available():
-            self.logger.info('Use GPU {}'.format(gpu_id))
-            use_gpu = True
-        else:
+        # os.environ['CUDA_VISIBLE_DEVICES'] = gpu_id
+        # if torch.cuda.is_available():
+        if gpu_id == 'cpu':
             self.logger.info('Use CPU')
             use_gpu = False
+        else:
+            os.environ['CUDA_VISIBLE_DEVICES'] == gpu_id
+            self.logger.info('Use GPU {}'.format(gpu_id))
+            use_gpu = True
 
         return use_gpu
 
