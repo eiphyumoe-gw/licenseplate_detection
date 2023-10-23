@@ -18,7 +18,7 @@ class Demo:
         self.configs = configs
         self.load_model()
         self.IMAGE_EXT = [".jpg", ".jpeg", ".webp", ".bmp", ".png"]
-        self.predictor = Predictor(self.model, self.exp, device=self.device, configs=self.configs, args = self.args)
+        self.predictor = Predictor(self.model, self.exp, device=self.device, configs=self.configs)
     
     def load_model(self):
         self.exp = get_exp(None, self.args.name) # select model name
