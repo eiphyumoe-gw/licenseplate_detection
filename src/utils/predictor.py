@@ -24,6 +24,7 @@ class Predictor(object):
         fp16=False,
         legacy=False,
         configs = None,
+        args = None,
     ):
         
         self.model = model
@@ -38,6 +39,7 @@ class Predictor(object):
         self.device = device
         self.fp16 = fp16
         self.preproc = ValTransform(legacy=legacy)
+        self.args = args
         self.load_inference_runner()
     
         # if trt_file is not None:
@@ -149,8 +151,8 @@ class Predictor(object):
         cfg = Config.fromfile(cfg_path)
         deploy_cfg = cfg['deploy']
         common_cfg = cfg.get('common')
-        deploy_cfg['gpu_id'] = self.configs_OCR.gpus.replace(" ", "")
-       
+        # deploy_cfg['gpu_id'] = self.args.gpus.replace(" ", "")
+        deploy_cfg['device'] = self.args.device
 
         self.runner = InferenceRunner(deploy_cfg, common_cfg)
         self.runner.load_checkpoint(checkpoint)
