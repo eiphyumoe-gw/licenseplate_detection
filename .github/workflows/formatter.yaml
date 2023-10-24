@@ -26,3 +26,6 @@ jobs:
                 pip3 install black
                 python -m black src/
               continue-on-error: true
+            - name: Test with pytest
+              run: |
+                python -m unittest discover test
