@@ -13,7 +13,7 @@ from omegaconf import OmegaConf
 from utils import Demo
 import json
 import os
-
+import time
 
 def make_parser():
     parser = argparse.ArgumentParser()
@@ -33,8 +33,8 @@ def main():
     configs = OmegaConf.load(args.config)
     os.makedirs(args.output, exist_ok=True)
     assert os.path.exists(args.path), "Input Path Error"
-    
-    json_output = os.path.join(args.output, 'predicted_.json')
+
+    json_output = os.path.join(args.output, time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime()) + ".json")
     demo = Demo(args, configs)
     
     result_str = demo.video_demo(args, configs)
