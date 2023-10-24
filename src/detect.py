@@ -37,7 +37,7 @@ def main():
     json_output = os.path.join(args.output, 'predicted_.json')
     demo = Demo(args, configs)
     
-    result_str = demo.video_demo(args.path, args.output, configs)
+    result_str = demo.video_demo(args, configs)
     write_json(result_str, json_output)
 
 
