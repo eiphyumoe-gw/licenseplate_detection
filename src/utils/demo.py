@@ -69,7 +69,7 @@ class Demo:
                     result_img, img_info = self.predictor.inference(frame)
                     result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
                     result_dict['frame_id'] = frame_count
-                    result_dict['current_vd_time'] = round((frame_count/fps), 3)
+                    result_dict['current_vd_time'] = str(round((frame_count/fps), 3))+ "s"
                     result_dict['Detected_bbox'] = bbox
                     result_dict['result'] = result_str
                     # cv2.imshow("Test",result_frame)
