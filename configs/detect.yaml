@@ -4,6 +4,7 @@ YOLOX:
   tsize: 640
   device: gpu
   ckpt: '../licenseplate_detection/src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
+  save_vd_result: True # False
 
 OCR:
   cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
