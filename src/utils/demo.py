@@ -72,10 +72,8 @@ class Demo:
                     result_dict['current_vd_time'] = round((frame_count/fps), 3)
                     result_dict['Detected_bbox'] = bbox
                     result_dict['result'] = result_str
-                    cv2.imshow("Test",result_frame)
+                    # cv2.imshow("Test",result_frame)
                     final_result.append(result_dict)
-                    if cv2.waitKey(5) & 0xFF == 27:
-                        break
                 if self.configs.YOLOX.save_vd_result:
                     movie_loader.write_video(result_frame)
             movie_loader.close()
