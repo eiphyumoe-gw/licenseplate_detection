@@ -29,7 +29,7 @@ class test_yoloxpredictor(unittest.TestCase):
         config_path = '../licenseplate_detection/configs/detect.yaml'
         configs = OmegaConf.load(config_path)
         
-        device = torch.device("cuda" if configs.YOLOX.device=="gpu" else "cpu")
+        device = 'cpu'
         
         exp = get_exp(None, 'yolox-s')
         model = exp.get_model()
