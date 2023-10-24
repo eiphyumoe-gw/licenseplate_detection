@@ -84,7 +84,7 @@ class Predictor(object):
                 outputs, self.num_classes, self.confthre,
                 self.nmsthre, class_agnostic=True
             )
-            logger.info("Infer time: {:.4f}s".format(time.time() - t0))
+            # logger.info("Infer time: {:.4f}s".format(time.time() - t0))
         return outputs, img_info
     
     def visual(self, output, img_info, cls_conf=0.35):
@@ -92,7 +92,6 @@ class Predictor(object):
         bbox_count = 0
         ratio = img_info["ratio"]
         img = img_info["raw_img"]
-        print(output)
         if output is None:
             return img, total_result_str, bbox_count
         output = output.cpu()
@@ -139,7 +138,7 @@ class Predictor(object):
         """
         
         pred_str, probs = self.runner(image)
-        self.runner.logger.info('predict string: {}'.format(pred_str))
+        # self.runner.logger.info('predict string: {}'.format(pred_str))
         return pred_str
     
     
