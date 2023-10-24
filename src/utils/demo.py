@@ -57,25 +57,25 @@ class Demo:
                 break
         return result_image, result_str
     
-    def video_demo(self, path, output):
+    def video_demo(self, args, configs):
         final_result = list()
         frame_count = 0
-        with Video(path, output) as movie_loader:
-            print("Path is ", path)
+        with Video(args.path, args.output,configs) as movie_loader:
             for frame in movie_loader.process_video():
                 result_dict = dict()
+                fps = movie_loader.get_fps()
                 frame_count += 1
                 with torch.no_grad():
                     result_img, img_info = self.predictor.inference(frame)
                     result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
                     result_dict['frame_id'] = frame_count
+                    result_dict['current_vd_time'] = round((frame_count/fps), 3)
                     result_dict['Detected_bbox'] = bbox
                     result_dict['result'] = result_str
-                    cv2.imshow("Test",result_frame)
+                    # cv2.imshow("Test",result_frame)
                     final_result.append(result_dict)
-                    if cv2.waitKey(5) & 0xFF == 27:
-                        break
-                movie_loader.video_writer(result_frame)
+                if self.configs.YOLOX.save_vd_result:
+                    movie_loader.write_video(result_frame)
             movie_loader.close()
         return final_result
     

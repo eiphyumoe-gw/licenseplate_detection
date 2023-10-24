@@ -1,9 +1,9 @@
 # License Plate Detection
 This repository aims to detect the text on the license plate. First, detect the car and license plate by using YOLOX. Then, extract the text from the license plate using vedastr which is an open source scene text recognition toolbox based on PyTorch.
 
-| Original                   | Detection by YOLOX                      | OCR detection                    |
+| Original                   | Detection by YOLOX                      | OCR Result                 |
 | ---------------------------| -----------------------------------------| -----------------------------------|
-| <img src="assests/cb4b754537798d23_jpg.rf.310e3c4544bf89d2f3109956b301db20.jpg" width = 270>                           | <img src="assests/result.png" width = 270/>| <p float='left'><img src="assests/test_0.png" width=100, height=80>&nbsp;&nbsp;&nbsp;<img src="assests/test_1.png" width=100>&nbsp;&nbsp;&nbsp;<img src="assests/test_0.png" width=100 height=80></p>|
+| <img src="assets/test.jpg" width = 270>                           | <p float='left'><img src="assets/license_plate.png" width=100, height=80>&nbsp;&nbsp;&nbsp;|**<font size = 5>{12122267}</font>**
 
 ## Install License Plate Detection
 
