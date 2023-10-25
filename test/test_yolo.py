@@ -61,7 +61,7 @@ class test_yoloxpredictor(unittest.TestCase):
 
         self.assertIsNotNone(result_frame)
         self.assertIsNotNone(result_str)
-        self.asserIsNotNone(bbox)
+        self.assertIsNotNone(bbox)
 
 
     
