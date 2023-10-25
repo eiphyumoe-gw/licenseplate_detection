@@ -21,8 +21,12 @@ jobs:
             - name: Install requirements
               run: |
                 pip3 install -r requirements.txt    
+                pip3 install gdown
             - name: Lint with black
               run: |
                 pip3 install black
                 python -m black src/
               continue-on-error: true
+            - name: Test with pytest
+              run: |
+                python -m unittest discover test
