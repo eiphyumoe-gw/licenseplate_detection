@@ -24,12 +24,20 @@ class test_yoloxpredictor(unittest.TestCase):
             os.makedirs(os.path.dirname(cls.weight_path))
         gdown.download(yolox_s_url, cls.weight_path, quiet = False)
 
-        cls.img = "../licenseplate_detection/assets/test.jpg" 
+
+        checkpoint_url = "https://drive.google.com/uc?id=1bcKtEcYGIOehgPfGi_TqPkvrm6rjOUKR"
+        cls.checkpoint = 'weights/small_satrn.pth'
+        if not os.path.exists(os.path.dirname(cls.checkpoint)):
+            os.makedirs(os.path.dirname(cls.checkpoint))
+        gdown.download(checkpoint_url, cls.checkpoint, quiet=False)
+        
+        cls.img_1 = "../licenseplate_detection/assets/test.jpg" 
         
         config_path = '../licenseplate_detection/configs/detect.yaml'
         configs = OmegaConf.load(config_path)
         
-        device = torch.device("cuda" if configs.YOLOX.device=="gpu" else "cpu")
+        # device = torch.device("cuda" if configs.YOLOX.device=="gpu" else "cpu")
+        device = "cpu"
         exp = get_exp(None, 'yolox-s')
         model = exp.get_model()
         model.eval()
@@ -38,19 +46,22 @@ class test_yoloxpredictor(unittest.TestCase):
         # model = fuse_model(model)
       
         cls.predictor = Predictor(
-            model, exp, device= device, configs= configs)
+            model, exp, device= device, configs= configs, checkpoint=cls.checkpoint)
 
     
 
     def test_inference(self):
-        test_image_path = self.img
+        test_image_path = self.img_1
         test_image = cv2.imread(test_image_path)
 
         # Perform inference on the test image
-        outputs, img_info = self.predictor.inference(test_image)
+        result_img, img_info = self.predictor.inference(test_image)
+        result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
+        
 
-        self.assertIsNotNone(outputs)
-        self.assertIsNotNone(img_info)
+        self.assertIsNotNone(result_frame)
+        self.assertIsNotNone(result_str)
+        self.asserIsNotNone(bbox)
 
 
     
