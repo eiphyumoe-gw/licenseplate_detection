@@ -34,7 +34,7 @@ class Predictor(object):
         self.num_classes = len(cls_names)
         self.confthre = self.configs.YOLOX.conf
         self.nmsthre = self.configs.YOLOX.nms
-        self.checkpoint = self.configs.OCR.checkpoint
+        self.checkpoint = self.configs.OCR.checkpoint if checkpoint is None else checkpoint
         self.test_size = (self.configs.YOLOX.tsize,self.configs.YOLOX.tsize)
         self.device = device
         self.fp16 = fp16
