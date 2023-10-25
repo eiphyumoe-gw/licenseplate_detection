@@ -53,15 +53,15 @@ class test_yoloxpredictor(unittest.TestCase):
     def test_inference(self):
         test_image_path = self.img_1
         test_image = cv2.imread(test_image_path)
-
+        actual_result = '12122267'
         # Perform inference on the test image
         result_img, img_info = self.predictor.inference(test_image)
         result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
-        
+        print(result_str)
 
-        self.assertIsNotNone(result_frame)
-        self.assertIsNotNone(result_str)
-        self.assertIsNotNone(bbox)
+        # self.assertIsNotNone(result_frame)
+        self.assertEqual(actual_result, result_str[0][0])
+        # self.assertIsNotNone(bbox)
 
 
     
