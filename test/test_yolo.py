@@ -30,11 +30,10 @@ class test_yoloxpredictor(unittest.TestCase):
         configs = OmegaConf.load(config_path)
         
         device = torch.device("cuda" if configs.YOLOX.device=="gpu" else "cpu")
-        print("Device is ", device)
         exp = get_exp(None, 'yolox-s')
         model = exp.get_model()
         model.eval()
-        ckpt = torch.load(configs.YOLOX.ckpt, map_location="cpu")
+        ckpt = torch.load(cls.weight_path, map_location="cpu")
         model.load_state_dict(ckpt["model"])
         model = fuse_model(model)
       
@@ -51,23 +50,10 @@ class test_yoloxpredictor(unittest.TestCase):
 
         self.assertIsNotNone(outputs)
         self.assertIsNotNone(img_info)
-
-
-    # def test_removeFile(self) -> None:
-    #     os.remove(self.img)
-    #     self.assertFalse(os.path.exists(self.img))
     
     def test_removeWeight(self) -> None:
         os.remove(self.weight_path)
         self.assertFalse(os.path.exists(self.weight_path))
-
-
-class cfg():
-
-    #constructor
-    def __init__(self, **dict):
-        self.__dict__.update(dict)
-
 
 if __name__ == '__main__':
     unittest.main()
