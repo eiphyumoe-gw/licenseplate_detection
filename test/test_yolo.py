@@ -33,11 +33,7 @@ class test_yoloxpredictor(unittest.TestCase):
         print("Device is ", device)
         exp = get_exp(None, 'yolox-s')
         model = exp.get_model()
-        model.cuda()
         model.eval()
-        cls_names = COCO_CLASSES
-        trt_file = None
-        decoder = None
         ckpt = torch.load(configs.YOLOX.ckpt, map_location="cpu")
         model.load_state_dict(ckpt["model"])
         model = fuse_model(model)
