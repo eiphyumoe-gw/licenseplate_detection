@@ -23,10 +23,11 @@ class Demo:
     def load_model(self):
         self.exp = get_exp(None, self.args.name) # select model name
         self.model = self.exp.get_model()
-        self.model.cuda()
-        self.model.eval()
         # self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cuda" if self.configs.YOLOX.device=="gpu" else "cpu")
+        if self.device == "cuda":
+            self.model.cuda()
+        self.model.eval()
         ckpt = torch.load(self.configs.YOLOX.ckpt, map_location="cpu")
         self.model.load_state_dict(ckpt['model'])
         self.model = fuse_model(self.model)
@@ -43,7 +44,9 @@ class Demo:
         return image_names
 
 
-    def image_demo(self, path):
+    def image_demo(self, path, output_path):
+        result_dict = dict()
+        final_result = list()
         if os.path.isdir(path):
             files = self.get_image_list(path)
         else:
@@ -51,19 +54,21 @@ class Demo:
         files.sort()
         for image_name in files:
             outputs, img_info = self.predictor.inference(image_name)
-            result_image, result_str = self.predictor.visual(outputs[0], img_info, self.predictor.confthre)
-            ch = cv2.waitKey(0)
-            if ch == 27 or ch == ord("q") or ch == ord("Q"):
-                break
-        return result_image, result_str
+            result_image, result_str, bbox = self.predictor.visual(outputs[0], img_info, self.predictor.confthre)
+            result_dict['Detected_bbox'] = bbox
+            result_dict['result'] = result_str
+            # cv2.imshow("Test",result_frame)
+            cv2.imwrite(f'{output_path}/test_{os.path.basename(image_name)}', result_image)
+            final_result.append(result_dict)
+        return final_result
     
     def video_demo(self, args, configs):
         final_result = list()
         frame_count = 0
+        fps = movie_loader.get_fps()
         with Video(args.path, args.output,configs) as movie_loader:
             for frame in movie_loader.process_video():
                 result_dict = dict()
-                fps = movie_loader.get_fps()
                 frame_count += 1
                 with torch.no_grad():
                     result_img, img_info = self.predictor.inference(frame)
