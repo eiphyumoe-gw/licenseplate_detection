@@ -18,11 +18,11 @@ class test_yoloxpredictor(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
 
-        yolox_nano_url = "https://drive.google.com/uc?id=1IIHvFx0Aby71ux_E5idH6ssfBbSXa0Tw"
+        yolox_s_url = "https://drive.google.com/uc?id=1IIHvFx0Aby71ux_E5idH6ssfBbSXa0Tw"
         cls.weight_path = 'weights/yolox_s.pth'
         if not os.path.exists(os.path.dirname(cls.weight_path)):
             os.makedirs(os.path.dirname(cls.weight_path))
-        gdown.download(yolox_nano_url, cls.weight_path, quiet = False)
+        gdown.download(yolox_s_url, cls.weight_path, quiet = False)
 
         cls.img = "../licenseplate_detection/assets/test.jpg" 
         
