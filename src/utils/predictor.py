@@ -24,17 +24,18 @@ class Predictor(object):
         fp16=False,
         legacy=False,
         configs = None,
+        checkpoint = None,
     ):
         
         self.model = model
         self.cls_names = cls_names
         self.decoder = decoder
-        self.configs_YOLOX = configs.YOLOX
-        self.configs_OCR = configs.OCR
+        self.configs = configs
         self.num_classes = len(cls_names)
-        self.confthre = self.configs_YOLOX.conf
-        self.nmsthre = self.configs_YOLOX.nms
-        self.test_size = (self.configs_YOLOX.tsize,self.configs_YOLOX.tsize)
+        self.confthre = self.configs.YOLOX.conf
+        self.nmsthre = self.configs.YOLOX.nms
+        self.checkpoint = self.configs.OCR.checkpoint
+        self.test_size = (self.configs.YOLOX.tsize,self.configs.YOLOX.tsize)
         self.device = device
         self.fp16 = fp16
         self.preproc = ValTransform(legacy=legacy)
@@ -143,18 +144,17 @@ class Predictor(object):
     
     
     def load_inference_runner(self):
-        cfg_path = self.configs_OCR.cfg
-        checkpoint = self.configs_OCR.checkpoint
+        cfg_path = self.configs.OCR.cfg
         cfg = Config.fromfile(cfg_path)
         deploy_cfg = cfg['deploy']
         common_cfg = cfg.get('common')
-        deploy_cfg['device'] = self.configs_OCR.device
+        deploy_cfg['device'] = self.configs.OCR.device
         
         if deploy_cfg['device'] == 'gpu':
-            deploy_cfg['gpu_id'] = self.configs_OCR.gpus
+            deploy_cfg['gpu_id'] = self.configs.OCR.gpus
         else:
             deploy_cfg['gpu_id'] = None
         self.runner = InferenceRunner(deploy_cfg, common_cfg)
-        self.runner.load_checkpoint(checkpoint)
+        self.runner.load_checkpoint(self.checkpoint)
 
     

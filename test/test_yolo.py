@@ -35,11 +35,12 @@ class test_yoloxpredictor(unittest.TestCase):
         model.eval()
         ckpt = torch.load(cls.weight_path, map_location="cpu")
         model.load_state_dict(ckpt["model"])
-        model = fuse_model(model)
+        # model = fuse_model(model)
       
         cls.predictor = Predictor(
             model, exp, device= device, configs= configs)
 
+    
 
     def test_inference(self):
         test_image_path = self.img
@@ -50,6 +51,8 @@ class test_yoloxpredictor(unittest.TestCase):
 
         self.assertIsNotNone(outputs)
         self.assertIsNotNone(img_info)
+
+
     
     def test_removeWeight(self) -> None:
         os.remove(self.weight_path)
