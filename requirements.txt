@@ -2,13 +2,13 @@ numpy
 opencv-python
 addict
 six
-torchvision>=0.5.*
+# torchvision>=0.5.*
 pillow>=6.0,<7.0
 lmdb
 nltk
 terminaltables
 albumentations
-torch>=1.7
+# torch>=1.7
 loguru
 tqdm
 thop
