@@ -20,6 +20,7 @@ cd licenseplate_detection
 
 ### 3. Install pytorch and dependencies.
 ```
+pip3 install torch torchvision
 pip3 install -r requirements.txt
 ```
 
