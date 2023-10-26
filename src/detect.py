@@ -18,6 +18,7 @@ import time
 def make_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default='../licenseplate_detection/configs/detect.yaml', help="Path to your config file")
+    parser.add_argument("--demo", default="video", help="demo type: image, video")
     parser.add_argument("--path", required=True, help= "Path to your image or video")
     parser.add_argument("--output", default= '../licenseplate_detection/result', help= "Path to your ouput folder")
     parser.add_argument("--name", default="yolox-s", help="Please select yolox-s or yolox-l")
@@ -36,10 +37,12 @@ def main():
 
     json_output = os.path.join(args.output, time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime()) + ".json")
     demo = Demo(args, configs)
-    
-    result_str = demo.video_demo(args, configs)
-    write_json(result_str, json_output)
-
+    if args.demo == "video":
+        result_str = demo.video_demo(args, configs)
+        write_json(result_str, json_output)
+    else:
+        result_str = demo.image_demo(args.path, args.output)
+        print(result_str)
 
     
 
