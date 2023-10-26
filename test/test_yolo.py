@@ -59,9 +59,9 @@ class test_yoloxpredictor(unittest.TestCase):
         result_frame, result_str, bbox = self.predictor.visual(result_img[0], img_info, self.predictor.confthre)
         print(result_str)
 
-        # self.assertIsNotNone(result_frame)
         self.assertEqual(actual_result, result_str[0][0])
-        # self.assertIsNotNone(bbox)
+        self.assertIsNotNone(result_frame)
+        self.assertIsNotNone(bbox)
 
 
     
