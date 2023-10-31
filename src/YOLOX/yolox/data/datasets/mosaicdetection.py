@@ -7,9 +7,9 @@ import random
 import cv2
 import numpy as np
 import sys
-sys.path.append("../licenseplate_detection/src/YOLOX")
+sys.path.append("src")
 
-from yolox.utils import adjust_box_anns, get_local_rank
+from YOLOX.yolox.utils import adjust_box_anns, get_local_rank
 
 from ..data_augment import random_affine
 from .datasets_wrapper import Dataset
