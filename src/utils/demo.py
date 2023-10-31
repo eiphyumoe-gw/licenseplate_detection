@@ -65,8 +65,8 @@ class Demo:
     def video_demo(self, args, configs):
         final_result = list()
         frame_count = 0
-        fps = movie_loader.get_fps()
         with Video(args.path, args.output,configs) as movie_loader:
+            fps = movie_loader.get_fps()
             for frame in movie_loader.process_video():
                 result_dict = dict()
                 frame_count += 1
