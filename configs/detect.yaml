@@ -3,11 +3,11 @@ YOLOX:
   nms: 0.45
   tsize: 640
   device: cpu
-  ckpt: '../licenseplate_detection/src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
+  ckpt: 'src/YOLOX/yolox/YOLOX_outputs/yolox_s/best_ckpt.pth'
   save_vd_result: True # False
 
 OCR:
-  cfg: '../licenseplate_detection/src/OCR/configs/small_satrn.py'
-  checkpoint: '../licenseplate_detection/src/OCR/checkpoint/small_satrn.pth'
+  cfg: 'src/OCR/configs/small_satrn.py'
+  checkpoint: 'src/OCR/checkpoint/small_satrn.pth'
   device: 'cpu' #cpu
   gpus: '1' # 0, 1, 2, 3, 4
