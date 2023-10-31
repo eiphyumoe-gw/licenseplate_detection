@@ -13,13 +13,13 @@ WORKDIR /Test-docker/
 RUN pip3 install Cython
 RUN pip3 install torch torchvision
 
-#install dependencies
+#install dependencies wheel for Pillow
 RUN apt-get update && apt-get install -y \
   zlib1g-dev \
   libjpeg-dev \
   gcc \
   libtiff5-dev
-  
+
 COPY src/ src/
 COPY test/ test/
 COPY weights/ weights/
