@@ -7,24 +7,33 @@ This repository aims to detect the text on the license plate. First, detect the 
 
 ## Install License Plate Detection
 
-### 1. Create venv environment and activate it.
-```
-python3 -m venv env
-source env/bin/activate
-```
-### 2. Clone the repository.
+### Clone the repository.
 ```
 git clone git@github.com:eiphyumoe47/licenseplate_detection.git
 cd licenseplate_detection
 ```
 
-### 3. Install pytorch and dependencies.
+### With Venv
+#### 1. Create venv environment and activate it.
+```
+python3 -m venv env
+source env/bin/activate
+```
+
+
+#### 2. Install pytorch and dependencies.
 ```
 pip3 install torch torchvision
 pip3 install -r requirements.txt
 ```
 
-### 4. Download YOLOX models weight files.
+### With Docker
+```
+make docker-build
+make docker-run
+```
+
+### Download YOLOX models weight files.
 
 |Model      | Weights       |
 |-----------|---------------|
@@ -35,7 +44,7 @@ These two models are the best ckpt model files which are trained based on the pr
 
 *Note: Yolox-s has been used in this project. Create folder `YOLOX_outputs/yolox-s`.Move Yolox weight files under `src/YOLOX/yolox/YOLOX_outputs/yolox-s/`.*
 
-### 5. Download the Pretrained OCR model file.
+### Download the Pretrained OCR model file.
 |Model      | Weights       |IIIT5k_300     |Case-sensitive|
 |-----------|---------------|---------------|--------------|
 |ResNet-CTC |[github](https://drive.google.com/file/d/1gtTcc5kpVs_s5a6OR7eBh431Otk_-NrE/view?usp=sharing)|87.97|False|
@@ -46,7 +55,7 @@ These two models are the best ckpt model files which are trained based on the pr
 The tabel shows the accuracy on the test IIIT5k_300 dataset. Small-satrn model has been used in this project.</br></br>
 *Note: Create checkpoint folder and move downloaded file to `checkpoint/`.*
 
-## Inference
+### Inference
 
 ```
 python3 src/detect.py --path ../../test_video.mp4 --config configs/detect.yaml --name yolox-s --output result
