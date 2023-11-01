@@ -58,7 +58,7 @@ class Demo:
             result_dict['Detected_bbox'] = bbox
             result_dict['result'] = result_str
             # cv2.imshow("Test",result_frame)
-            cv2.imwrite(f'{output_path}/test_{os.path.basename(image_name)}', result_image)
+            cv2.imwrite(f'os.path.join({output_path},test_{os.path.basename(image_name)})', result_image)
             final_result.append(result_dict)
         return final_result
     
