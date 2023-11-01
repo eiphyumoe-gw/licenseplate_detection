@@ -66,5 +66,5 @@ python -m unittest discover test
 ```
 python3 src/detect.py --path ${test_video.mp4} --config configs/detect.yaml --name yolox-s --output result
 ```
-You can modify the configurations as you wish.
+If you want to run inference with gpu, you can change device to *'gpu'* in `configs/detect.yaml`.
 
